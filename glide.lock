@@ -1,0 +1,52 @@
+hash: 7b54281402dbbabacce652d8cde8f70321ba4437faabbf202884faeb3835d1a1
+updated: 2017-03-27T00:51:53.848427619+02:00
+imports:
+- name: github.com/golang/protobuf
+  version: 69b215d01a5606c843240eab4937eab3acee6530
+  subpackages:
+  - proto
+- name: github.com/google/protobuf
+  version: 593e917c176b5bc5aafa57bf9f6030d749d91cd5
+- name: github.com/googleapis/googleapis
+  version: ad6306e2486ad8acd030748306f774cc8b68e4bc
+- name: github.com/grpc-ecosystem/grpc-gateway
+  version: a8f25bd1ab549f8b87afd48aa9181221e9d439bb
+- name: github.com/kelseyhightower/envconfig
+  version: f611eb38b3875cc3bd991ca91c51d06446afa14c
+- name: github.com/sagikazarmark/healthz
+  version: 53d84ee314bb0f042a6d5c2fb65bab4301686dcf
+- name: github.com/sagikazarmark/serverz
+  version: 6795311fdd32a52d3decca847d2ae602e66af310
+- name: github.com/Sirupsen/logrus
+  version: ba1b36c82c5e05c4f912a88eab0dcd91a171688f
+- name: golang.org/x/net
+  version: 61557ac0112b576429a0df080e1c2cef5dfbb642
+  subpackages:
+  - context
+  - http2
+  - http2/hpack
+  - idna
+  - internal/timeseries
+  - lex/httplex
+  - trace
+- name: golang.org/x/sys
+  version: e24f485414aeafb646f6fca458b0bf869c0880a1
+  subpackages:
+  - unix
+- name: google.golang.org/genproto
+  version: de9f5e90fe9b278809363f08c2072d2f2a429de7
+- name: google.golang.org/grpc
+  version: cdee119ee21e61eef7093a41ba148fa83585e143
+  subpackages:
+  - codes
+  - credentials
+  - grpclog
+  - internal
+  - keepalive
+  - metadata
+  - naming
+  - peer
+  - stats
+  - tap
+  - transport
+testImports: []

@@ -1,0 +1,34 @@
+language: go
+
+sudo: false
+
+services:
+    - docker
+
+go:
+    - 1.8.x
+    - tip
+
+before_install:
+    - mkdir -p $HOME/bin
+    - curl -sL http://get.binhq.io/githubin | DEST=$HOME/bin bash
+    - githubin get Masterminds/glide 0.12.3 -o $HOME/bin
+    - make envcheck
+
+install: make setup
+
+before_script:
+    - export VERSION=${TRAVIS_TAG:-$TRAVIS_BRANCH}
+    - export DOCKER_IMAGE=deshboard/$(go list . | cut -d '/' -f 3)
+
+script:
+    - make ARGS="-tags=integration" check
+    - if [[ $TRAVIS_EVENT_TYPE = push ]]; then make IMAGE=$DOCKER_IMAGE VERSION=$VERSION docker; fi
+
+deploy:
+    provider: script
+    skip_cleanup: true
+    script: docker login -u $DOCKER_USER -p $DOCKER_PASS && docker push $DOCKER_IMAGE
+    on:
+        all_branches: true
+        condition: $TRAVIS_GO_VERSION =~ ^1\.8(\.[0-9]+)?$

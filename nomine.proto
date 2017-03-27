@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package nomine;
+
+option go_package = "api";
+
+import "google/api/annotations.proto";
+
+message NameCheckRequest {
+    string name = 1;
+    repeated string services = 2;
+}
+
+message NameCheckResponse {
+    map<string, Result> results = 1;
+}
+
+enum Result {
+    AVAILABLE = 0;
+    UNAVAILABLE = 1;
+    UNKOWN = 2;
+}
+
+service Nomine {
+    rpc Check(NameCheckRequest) returns (NameCheckResponse) {
+        option (google.api.http) = { post: "/check" body: "*" };
+    }
+}
