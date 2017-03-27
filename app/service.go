@@ -31,7 +31,8 @@ func (s *Service) Check(ctx context.Context, request *api.NameCheckRequest) (*ap
 			} else {
 				response.Results[service] = api.Result_UNAVAILABLE
 			}
-
+		} else {
+			response.Results[service] = api.Result_UNKOWN
 		}
 	}
 
