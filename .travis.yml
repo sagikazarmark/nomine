@@ -9,6 +9,10 @@ go:
     - 1.8.x
     - tip
 
+branches:
+    except:
+        - gh-pages
+
 before_install:
     - mkdir -p $HOME/bin
     - curl -sL http://get.binhq.io/githubin | DEST=$HOME/bin bash
