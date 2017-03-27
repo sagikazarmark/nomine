@@ -12,7 +12,7 @@ when you find that out *after* you started registering with that name.
 Nomine is here to help. It checks your desired name in different services,
 so that you can find a globally unique name.
 
-(Nomine is *name* in Latin)
+(Nomine means *name* in Latin)
 
 
 ## Supported services
