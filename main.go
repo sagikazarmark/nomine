@@ -56,7 +56,7 @@ func main() {
 	}
 
 	service := app.NewService(map[string]services.NameChecker{
-		"github": &services.Github{},
+		"github": services.NewGithub(logger),
 	})
 	grpcServer := grpc.NewServer()
 	api.RegisterNomineServer(grpcServer, service)
