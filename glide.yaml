@@ -20,3 +20,5 @@ import:
   - trace
 - package: github.com/sagikazarmark/serverz
   version: ~0.2.0
+- package: github.com/rs/cors
+  version: ^1.0.0

@@ -1,18 +1,28 @@
-hash: 7b54281402dbbabacce652d8cde8f70321ba4437faabbf202884faeb3835d1a1
-updated: 2017-03-27T00:51:53.848427619+02:00
+hash: 65bba3ceae28b84ef7379d95f480a2c619285c8cf4325acbe299b6a06361e2a0
+updated: 2017-03-28T18:40:14.563360115+02:00
 imports:
 - name: github.com/golang/protobuf
   version: 69b215d01a5606c843240eab4937eab3acee6530
   subpackages:
+  - jsonpb
   - proto
+  - protoc-gen-go/descriptor
 - name: github.com/google/protobuf
   version: 593e917c176b5bc5aafa57bf9f6030d749d91cd5
 - name: github.com/googleapis/googleapis
   version: ad6306e2486ad8acd030748306f774cc8b68e4bc
 - name: github.com/grpc-ecosystem/grpc-gateway
   version: a8f25bd1ab549f8b87afd48aa9181221e9d439bb
+  subpackages:
+  - runtime
+  - runtime/internal
+  - utilities
 - name: github.com/kelseyhightower/envconfig
   version: f611eb38b3875cc3bd991ca91c51d06446afa14c
+- name: github.com/rs/cors
+  version: a62a804a8a009876ca59105f7899938a1349f4b3
+- name: github.com/rs/xhandler
+  version: ed27b6fd65218132ee50cd95f38474a3d8a2cd12
 - name: github.com/sagikazarmark/healthz
   version: 53d84ee314bb0f042a6d5c2fb65bab4301686dcf
 - name: github.com/sagikazarmark/serverz
@@ -35,6 +45,8 @@ imports:
   - unix
 - name: google.golang.org/genproto
   version: de9f5e90fe9b278809363f08c2072d2f2a429de7
+  subpackages:
+  - googleapis/api/annotations
 - name: google.golang.org/grpc
   version: cdee119ee21e61eef7093a41ba148fa83585e143
   subpackages:

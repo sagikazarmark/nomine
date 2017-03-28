@@ -15,6 +15,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+	"github.com/rs/cors"
 	"github.com/sagikazarmark/healthz"
 	"github.com/sagikazarmark/nomine/api"
 	"github.com/sagikazarmark/nomine/app"
@@ -75,7 +76,7 @@ func main() {
 
 	restServer := &serverz.NamedServer{
 		Server: &http.Server{
-			Handler:  restHandler,
+			Handler:  cors.Default().Handler(restHandler),
 			ErrorLog: log.New(w, "rest: ", 0),
 		},
 		Name: "rest",
