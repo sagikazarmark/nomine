@@ -12,6 +12,7 @@ go:
 branches:
     except:
         - gh-pages
+        - site
 
 before_install:
     - mkdir -p $HOME/bin
