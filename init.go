@@ -9,6 +9,7 @@ import (
 	_ "net/http/pprof"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/evalphobia/logrus_fluent"
 	"github.com/kelseyhightower/envconfig"
 	"github.com/sagikazarmark/nomine/app"
 	"github.com/sagikazarmark/serverz"
@@ -53,5 +54,19 @@ func init() {
 	// This is probably OK as the service runs in Docker
 	trace.AuthRequest = func(req *http.Request) (any, sensitive bool) {
 		return true, true
+	}
+
+	// Initialize Fluentd
+	if config.FluentdEnabled {
+		fluentdHook, err := logrus_fluent.New(config.FluentdHost, config.FluentdPort)
+		if err != nil {
+			logger.Panic(err)
+		}
+
+		fluentdHook.SetTag(app.ServiceName)
+		fluentdHook.AddFilter("error", logrus_fluent.FilterError)
+
+		logger.Logger.Hooks.Add(fluentdHook)
+		shutdown.Register(fluentdHook.Fluent.Close)
 	}
 }

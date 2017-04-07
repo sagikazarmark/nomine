@@ -22,3 +22,5 @@ import:
   version: ~0.2.0
 - package: github.com/rs/cors
   version: ^1.0.0
+- package: github.com/evalphobia/logrus_fluent
+  version: ~0.1.0

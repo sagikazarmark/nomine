@@ -13,4 +13,8 @@ type Configuration struct {
 	HealthAddr      string        `ignored:"true"`
 	DebugAddr       string        `ignored:"true"`
 	ShutdownTimeout time.Duration `ignored:"true"`
+
+	FluentdEnabled bool   `split_words:"true"`
+	FluentdHost    string `split_words:"true"`
+	FluentdPort    int    `split_words:"true" default:"24224"`
 }
