@@ -4,6 +4,8 @@ import (
 	"github.com/sagikazarmark/nomine/api"
 	"github.com/sagikazarmark/nomine/services"
 	context "golang.org/x/net/context"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 )
 
 // Service implements the RPC server
@@ -18,6 +20,14 @@ func NewService(checkers map[string]services.NameChecker) *Service {
 
 // Check checks a name availability
 func (s *Service) Check(ctx context.Context, request *api.NameCheckRequest) (*api.NameCheckResponse, error) {
+	if request.GetName() == "" {
+		return nil, grpc.Errorf(codes.InvalidArgument, "name should not be empty.")
+	}
+
+	if len(request.GetServices()) < 1 {
+		return nil, grpc.Errorf(codes.InvalidArgument, "service list should not be empty.")
+	}
+
 	response := &api.NameCheckResponse{}
 	response.Results = make(map[string]api.Result)
 
