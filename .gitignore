@@ -4,3 +4,8 @@
 /docker-compose.override.yml
 /var/
 /vendor/
+
+# Site
+/dist/
+/node_modules/
+/phantomjsdriver.log
