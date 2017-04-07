@@ -1,8 +1,12 @@
 hash: e6caad127ac32b37d856ab73b0886bcf475f8dff131da2929f9a729eafc39795
-updated: 2017-04-08T00:13:36.257782384+02:00
+updated: 2017-04-08T00:37:07.88401606+02:00
 imports:
 - name: github.com/evalphobia/logrus_fluent
   version: 86bb83d119886b935a52194cad48fd01815b0125
+- name: github.com/fluent/fluent-logger-golang
+  version: 28bdb662295c1b7aca09c1a4edbf9430010775a9
+  subpackages:
+  - fluent
 - name: github.com/golang/protobuf
   version: 69b215d01a5606c843240eab4937eab3acee6530
   subpackages:
@@ -21,6 +25,8 @@ imports:
   - utilities
 - name: github.com/kelseyhightower/envconfig
   version: f611eb38b3875cc3bd991ca91c51d06446afa14c
+- name: github.com/philhofer/fwd
+  version: 98c11a7a6ec829d672b03833c3d69a7fae1ca972
 - name: github.com/rs/cors
   version: a62a804a8a009876ca59105f7899938a1349f4b3
 - name: github.com/rs/xhandler
@@ -31,6 +37,10 @@ imports:
   version: 6795311fdd32a52d3decca847d2ae602e66af310
 - name: github.com/Sirupsen/logrus
   version: ba1b36c82c5e05c4f912a88eab0dcd91a171688f
+- name: github.com/tinylib/msgp
+  version: 362bfb3384d53ae4d5dd745983a4d70b6d23628c
+  subpackages:
+  - msgp
 - name: golang.org/x/net
   version: 61557ac0112b576429a0df080e1c2cef5dfbb642
   subpackages:
