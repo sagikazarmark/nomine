@@ -27,6 +27,10 @@ export class AppComponent {
     constructor (private nomineService: NomineService) {}
 
     check() {
+        if (this.name.length == 0) {
+            return;
+        }
+
         this.checkInProgress = true;
 
         var s: string[] = [];
