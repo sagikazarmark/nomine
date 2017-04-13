@@ -18,5 +18,9 @@ type Configuration struct {
 	FluentdHost    string `split_words:"true"`
 	FluentdPort    int    `split_words:"true" default:"24224"`
 
-	GithubToken string `split_words:"true"`
+	GithubToken           string `split_words:"true"`
+	TwitterConsumerKey    string `split_words:"true" required:"true"`
+	TwitterConsumerSecret string `split_words:"true" required:"true"`
+	TwitterAccessKey      string `split_words:"true" required:"true"`
+	TwitterAccessSecret   string `split_words:"true" required:"true"`
 }
