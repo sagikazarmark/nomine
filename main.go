@@ -13,6 +13,7 @@ import (
 
 	"google.golang.org/grpc"
 
+	"github.com/ChimeraCoder/anaconda"
 	"github.com/Sirupsen/logrus"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/rs/cors"
@@ -56,8 +57,14 @@ func main() {
 		go serverManager.ListenAndStartServer(debugServer, config.DebugAddr)(errChan)
 	}
 
+	anaconda.SetConsumerKey(config.TwitterConsumerKey)
+	anaconda.SetConsumerSecret(config.TwitterConsumerSecret)
 	service := app.NewService(map[string]services.NameChecker{
 		"github": services.NewGithub(config.GithubToken, logger),
+		"twitter": services.NewTwitter(
+			anaconda.NewTwitterApi(config.TwitterAccessKey, config.TwitterAccessSecret),
+			logger,
+		),
 	})
 	grpcServer := grpc.NewServer()
 	api.RegisterNomineServer(grpcServer, service)

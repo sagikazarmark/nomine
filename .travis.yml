@@ -9,6 +9,13 @@ go:
     - 1.8.x
     - tip
 
+env:
+    global:
+        TWITTER_CONSUMER_KEY: key
+        TWITTER_CONSUMER_SECRET: secret
+        TWITTER_ACCESS_KEY: key
+        TWITTER_ACCESS_SECRET: secret
+
 branches:
     except:
         - gh-pages
