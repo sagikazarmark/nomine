@@ -31,11 +31,49 @@ func request_Nomine_Check_0(ctx context.Context, marshaler runtime.Marshaler, cl
 	var protoReq NameCheckRequest
 	var metadata runtime.ServerMetadata
 
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["service"]
+	if !ok {
+		return nil, metadata, grpc.Errorf(codes.InvalidArgument, "missing parameter %s", "service")
+	}
+
+	protoReq.Service, err = runtime.String(val)
+
+	if err != nil {
+		return nil, metadata, err
+	}
+
+	val, ok = pathParams["name"]
+	if !ok {
+		return nil, metadata, grpc.Errorf(codes.InvalidArgument, "missing parameter %s", "name")
+	}
+
+	protoReq.Name, err = runtime.String(val)
+
+	if err != nil {
+		return nil, metadata, err
+	}
+
+	msg, err := client.Check(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func request_Nomine_MultiCheck_0(ctx context.Context, marshaler runtime.Marshaler, client NomineClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq MultiNameCheckRequest
+	var metadata runtime.ServerMetadata
+
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil {
 		return nil, metadata, grpc.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.Check(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.MultiCheck(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
@@ -70,7 +108,7 @@ func RegisterNomineHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMu
 func RegisterNomineHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
 	client := NewNomineClient(conn)
 
-	mux.Handle("POST", pattern_Nomine_Check_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Nomine_Check_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(ctx)
 		defer cancel()
 		if cn, ok := w.(http.CloseNotifier); ok {
@@ -98,13 +136,45 @@ func RegisterNomineHandler(ctx context.Context, mux *runtime.ServeMux, conn *grp
 
 	})
 
+	mux.Handle("POST", pattern_Nomine_MultiCheck_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(ctx)
+		defer cancel()
+		if cn, ok := w.(http.CloseNotifier); ok {
+			go func(done <-chan struct{}, closed <-chan bool) {
+				select {
+				case <-done:
+				case <-closed:
+					cancel()
+				}
+			}(ctx.Done(), cn.CloseNotify())
+		}
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, req)
+		if err != nil {
+			runtime.HTTPError(ctx, outboundMarshaler, w, req, err)
+		}
+		resp, md, err := request_Nomine_MultiCheck_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Nomine_MultiCheck_0(ctx, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
 var (
-	pattern_Nomine_Check_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"check"}, ""))
+	pattern_Nomine_Check_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 1, 0, 4, 1, 5, 2}, []string{"check", "service", "name"}, ""))
+
+	pattern_Nomine_MultiCheck_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"check"}, ""))
 )
 
 var (
 	forward_Nomine_Check_0 = runtime.ForwardResponseMessage
+
+	forward_Nomine_MultiCheck_0 = runtime.ForwardResponseMessage
 )

@@ -8,21 +8,35 @@ import "google/api/annotations.proto";
 
 message NameCheckRequest {
     string name = 1;
-    repeated string services = 2;
+    string service = 2;
 }
 
 message NameCheckResponse {
+    int32 result = 1; // Ugly hack, see https://github.com/grpc-ecosystem/grpc-gateway/issues/354
+}
+
+message MultiNameCheckRequest {
+    string name = 1;
+    repeated string services = 2;
+}
+
+message MultiNameCheckResponse {
     map<string, Result> results = 1;
 }
 
 enum Result {
-    AVAILABLE = 0;
-    UNAVAILABLE = 1;
-    UNKOWN = 2;
+    NOTHING = 0; // Ugly hack, see https://github.com/grpc-ecosystem/grpc-gateway/issues/355
+    AVAILABLE = 1;
+    UNAVAILABLE = 2;
+    UNKOWN = 3;
 }
 
 service Nomine {
     rpc Check(NameCheckRequest) returns (NameCheckResponse) {
+        option (google.api.http) = { get: "/check/{service}/{name}" };
+    }
+
+    rpc MultiCheck(MultiNameCheckRequest) returns (MultiNameCheckResponse) {
         option (google.api.http) = { post: "/check" body: "*" };
     }
 }

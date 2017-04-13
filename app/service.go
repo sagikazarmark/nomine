@@ -24,11 +24,40 @@ func (s *Service) Check(ctx context.Context, request *api.NameCheckRequest) (*ap
 		return nil, grpc.Errorf(codes.InvalidArgument, "name should not be empty.")
 	}
 
+	service := request.GetService()
+	if service == "" {
+		return nil, grpc.Errorf(codes.InvalidArgument, "service should not be empty.")
+	}
+
+	response := &api.NameCheckResponse{}
+
+	if checker, ok := s.checkers[service]; ok {
+		result, err := checker.Check(request.GetName())
+		if err != nil {
+			response.Result = int32(api.Result_UNKOWN)
+		} else if result {
+			response.Result = int32(api.Result_AVAILABLE)
+		} else {
+			response.Result = int32(api.Result_UNAVAILABLE)
+		}
+	} else {
+		response.Result = int32(api.Result_UNKOWN)
+	}
+
+	return response, nil
+}
+
+// MultiCheck checks multiple name availability
+func (s *Service) MultiCheck(ctx context.Context, request *api.MultiNameCheckRequest) (*api.MultiNameCheckResponse, error) {
+	if request.GetName() == "" {
+		return nil, grpc.Errorf(codes.InvalidArgument, "name should not be empty.")
+	}
+
 	if len(request.GetServices()) < 1 {
 		return nil, grpc.Errorf(codes.InvalidArgument, "service list should not be empty.")
 	}
 
-	response := &api.NameCheckResponse{}
+	response := &api.MultiNameCheckResponse{}
 	response.Results = make(map[string]api.Result)
 
 	for _, service := range request.GetServices() {
