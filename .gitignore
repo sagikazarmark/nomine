@@ -42,4 +42,5 @@ Thumbs.db
 
 phantomjsdriver.log
 /build/
+/.env
 /vendor/

@@ -16,10 +16,16 @@ export class AppComponent {
             "id": "github",
             "name": "Github",
         },
+        {
+            "icon": "fa fa-twitter",
+            "id": "twitter",
+            "name": "Twitter",
+        },
     ];
 
     results: Result = {
         "github": -1,
+        "twitter": -1,
     };
 
     checkInProgress = false;
