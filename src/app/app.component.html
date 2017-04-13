@@ -20,9 +20,9 @@
                 <td><i class="{{ service.icon }}"></i> <b>{{ service.name }}</b></td>
                 <td [ngSwitch]="results[service.id]" class="result">
                     <span *ngSwitchCase="-1">-</span>
-                    <span *ngSwitchCase="0" class="available">Available</span>
-                    <span *ngSwitchCase="1" class="unavailable">Unavailable</span>
-                    <span *ngSwitchCase="2" class="unknown">Unknown</span>
+                    <span *ngSwitchCase="1" class="available">Available</span>
+                    <span *ngSwitchCase="2" class="unavailable">Unavailable</span>
+                    <span *ngSwitchCase="3" class="unknown">Unknown</span>
                     <span *ngSwitchDefault class="unknown">Unknown</span>
                 </td>
             </tr>
