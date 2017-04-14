@@ -23,4 +23,6 @@ type Configuration struct {
 	TwitterConsumerSecret string `split_words:"true" required:"true"`
 	TwitterAccessKey      string `split_words:"true" required:"true"`
 	TwitterAccessSecret   string `split_words:"true" required:"true"`
+	WhoisxmlUser          string `split_words:"true" required:"true"`
+	WhoisxmlPassword      string `split_words:"true" required:"true"`
 }
