@@ -26,12 +26,22 @@ export class AppComponent {
             "id": "docker",
             "name": "Docker",
         },
+        {
+            "id": "com_domain",
+            "name": ".com domain",
+        },
+        {
+            "id": "org_domain",
+            "name": ".org domain",
+        },
     ];
 
     results = {
         "github": -1,
         "twitter": -1,
         "docker": -1,
+        "com_domain": -1,
+        "org_domain": -1,
     };
 
     checksInProgress = 0;
