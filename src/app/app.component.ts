@@ -21,11 +21,17 @@ export class AppComponent {
             "id": "twitter",
             "name": "Twitter",
         },
+        {
+            "icon": "fa fa-docker",
+            "id": "docker",
+            "name": "Docker",
+        },
     ];
 
     results = {
         "github": -1,
         "twitter": -1,
+        "docker": -1,
     };
 
     checksInProgress = 0;
