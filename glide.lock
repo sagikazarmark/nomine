@@ -1,5 +1,5 @@
-hash: 4f5026e9c7abda411fe6e23960c3c18bc86b220e0ace020f5be5a6b72d12d082
-updated: 2017-04-13T23:56:38.649037882+02:00
+hash: 6f38dd6eaac6c5ce0947db68ebeffa6846af533bace45507f0d4f9c71eae2154
+updated: 2017-04-14T14:30:56.068704719+02:00
 imports:
 - name: github.com/azr/backoff
   version: 53511d3c733003985b0b76f733df1f4d0095ee6a
@@ -7,6 +7,10 @@ imports:
   version: 51200854e890da0fcefd1e26524b8ddd175ae850
 - name: github.com/ChimeraCoder/tokenbucket
   version: c5a927568de7aad8a58127d80bcd36ca4e71e454
+- name: github.com/dnsimple/dnsimple-go
+  version: d1105abc03b313d7b8d9b04364f6bd053b346e59
+  subpackages:
+  - dnsimple
 - name: github.com/dustin/go-jsonpointer
   version: ba0abeacc3dcca5b9b20f31509c46794edbc9965
 - name: github.com/dustin/gojson
@@ -27,6 +31,10 @@ imports:
   - jsonpb
   - proto
   - protoc-gen-go/descriptor
+- name: github.com/google/go-querystring
+  version: 53e6ce116135b80d037921a7fdd5138cf32d7a8a
+  subpackages:
+  - query
 - name: github.com/google/protobuf
   version: b50c9ec1223895973d0e2fa6b6cb74ec3c8f3ce8
 - name: github.com/googleapis/googleapis

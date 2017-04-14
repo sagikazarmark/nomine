@@ -23,4 +23,6 @@ type Configuration struct {
 	TwitterConsumerSecret string `split_words:"true" required:"true"`
 	TwitterAccessKey      string `split_words:"true" required:"true"`
 	TwitterAccessSecret   string `split_words:"true" required:"true"`
+	DNSimpleAccountID     string `envconfig:"dnsimple_account_id" required:"true"`
+	DNSimpleToken         string `envconfig:"dnsimple_token" required:"true"`
 }

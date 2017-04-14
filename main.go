@@ -15,6 +15,7 @@ import (
 
 	"github.com/ChimeraCoder/anaconda"
 	"github.com/Sirupsen/logrus"
+	"github.com/dnsimple/dnsimple-go/dnsimple"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/rs/cors"
 	"github.com/sagikazarmark/healthz"
@@ -59,13 +60,15 @@ func main() {
 
 	anaconda.SetConsumerKey(config.TwitterConsumerKey)
 	anaconda.SetConsumerSecret(config.TwitterConsumerSecret)
+	dnsimpleClient := dnsimple.NewClient(dnsimple.NewOauthTokenCredentials(config.DNSimpleToken))
 	service := app.NewService(map[string]services.NameChecker{
 		"github": services.NewGithub(config.GithubToken, logger),
 		"twitter": services.NewTwitter(
 			anaconda.NewTwitterApi(config.TwitterAccessKey, config.TwitterAccessSecret),
 			logger,
 		),
-		"docker": services.NewDocker(logger),
+		"docker":     services.NewDocker(logger),
+		"com_domain": services.NewDnsimple(dnsimpleClient, config.DNSimpleAccountID, "com", logger),
 	})
 	grpcServer := grpc.NewServer()
 	api.RegisterNomineServer(grpcServer, service)
