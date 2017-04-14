@@ -34,6 +34,14 @@ export class AppComponent {
             "id": "org_domain",
             "name": ".org domain",
         },
+        {
+            "id": "io_domain",
+            "name": ".io domain",
+        },
+        {
+            "id": "net_domain",
+            "name": ".net domain",
+        },
     ];
 
     results = {
@@ -42,6 +50,8 @@ export class AppComponent {
         "docker": -1,
         "com_domain": -1,
         "org_domain": -1,
+        "io_domain": -1,
+        "net_domain": -1,
     };
 
     checksInProgress = 0;
