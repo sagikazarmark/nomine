@@ -65,6 +65,7 @@ func main() {
 			anaconda.NewTwitterApi(config.TwitterAccessKey, config.TwitterAccessSecret),
 			logger,
 		),
+		"docker": services.NewDocker(logger),
 	})
 	grpcServer := grpc.NewServer()
 	api.RegisterNomineServer(grpcServer, service)
