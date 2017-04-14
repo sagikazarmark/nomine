@@ -4,9 +4,9 @@
 </header>
 <main>
     <md-input-container>
-        <input mdInput placeholder="Name" [(ngModel)]="name" [disabled]="checkInProgress">
+        <input mdInput placeholder="Name" [(ngModel)]="name" [disabled]="checksInProgress > 0">
     </md-input-container>
-    <button md-raised-button color="primary" (click)="check()" [disabled]="checkInProgress">SEARCH</button>
+    <button md-raised-button color="primary" (click)="check()" [disabled]="checksInProgress > 0">SEARCH</button>
 
     <table class="bordered">
         <thead>

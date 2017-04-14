@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NomineService, Result } from './nomine.service';
+import { NomineService } from './nomine.service';
 
 @Component({
     selector: 'app',
@@ -23,12 +23,12 @@ export class AppComponent {
         },
     ];
 
-    results: Result = {
+    results = {
         "github": -1,
         "twitter": -1,
     };
 
-    checkInProgress = false;
+    checksInProgress = 0;
 
     constructor (private nomineService: NomineService) {}
 
@@ -37,20 +37,24 @@ export class AppComponent {
             return;
         }
 
-        this.checkInProgress = true;
-
-        var s: string[] = [];
-
         for (var i = 0; i < this.services.length; i++) {
-            s.push(this.services[i].id);
-        }
+            this.checksInProgress++;
 
-        this.nomineService.check(this.name, s).subscribe(
-            results => {
-                this.checkInProgress = false;
-                this.results = results;
-            },
-            //error => this.errorMessage = <any>error
-        );
+            var service = this.services[i].id;
+            this.results[service] = -1;
+
+            this.nomineService.check(this.name, service).subscribe(
+                this.processor(service),
+                //error => this.errorMessage = <any>error
+            );
+        }
+    }
+
+    processor(service: string) {
+        return (result) => {
+            this.checksInProgress--;
+
+            this.results[service] = result;
+        };
     }
 }

@@ -12,17 +12,12 @@ export class NomineService {
 
     constructor(private http: Http) {}
 
-    check(name: string, services: string[]): Observable<Result> {
-        console.log(environment.apiEndpoint + this.url)
-        return this.http.post(environment.apiEndpoint + this.url, { name: name, services: services })
+    check(name: string, service: string): Observable<number> {
+        return this.http.get(environment.apiEndpoint + this.url + "/" + service + "/" + name)
             .map((res: Response) => {
                 let body = res.json();
-                return body.results || { };
+                return body.result || { };
             })
         ;
     }
-}
-
-export interface Result {
-    [key: string]: number;
 }
