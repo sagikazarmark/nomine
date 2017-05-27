@@ -1,10 +1,10 @@
-hash: 4f5026e9c7abda411fe6e23960c3c18bc86b220e0ace020f5be5a6b72d12d082
-updated: 2017-04-13T23:56:38.649037882+02:00
+hash: 65fb21ff044d672719fe351c207da6c02522eb9e0c7a9ac75f492041353b8712
+updated: 2017-05-27T22:40:26.450464827+02:00
 imports:
 - name: github.com/azr/backoff
   version: 53511d3c733003985b0b76f733df1f4d0095ee6a
 - name: github.com/ChimeraCoder/anaconda
-  version: 51200854e890da0fcefd1e26524b8ddd175ae850
+  version: 6def80702964f0219b52da8e306b7fa6a41fb818
 - name: github.com/ChimeraCoder/tokenbucket
   version: c5a927568de7aad8a58127d80bcd36ca4e71e454
 - name: github.com/dustin/go-jsonpointer
@@ -27,12 +27,13 @@ imports:
   - jsonpb
   - proto
   - protoc-gen-go/descriptor
+  - ptypes/any
 - name: github.com/google/protobuf
-  version: b50c9ec1223895973d0e2fa6b6cb74ec3c8f3ce8
+  version: 49a56da93ff3ab7d9a2252639344ad28db8cdff6
 - name: github.com/googleapis/googleapis
   version: ad6306e2486ad8acd030748306f774cc8b68e4bc
 - name: github.com/grpc-ecosystem/grpc-gateway
-  version: 18d159699f2e83fc5bb9ef2f79465ca3f3122676
+  version: 589b126116b5fc961939b3e156c29e4d9d58222f
   subpackages:
   - runtime
   - runtime/internal
@@ -46,9 +47,14 @@ imports:
 - name: github.com/rs/xhandler
   version: ed27b6fd65218132ee50cd95f38474a3d8a2cd12
 - name: github.com/sagikazarmark/healthz
-  version: 53d84ee314bb0f042a6d5c2fb65bab4301686dcf
+  version: 941786782b035e1a9a533ca7b8c685792b3cbedb
 - name: github.com/sagikazarmark/serverz
-  version: 6795311fdd32a52d3decca847d2ae602e66af310
+  version: 59a44e00a01fbec7f080dc8d0e13366100439f32
+- name: github.com/sagikazarmark/utilz
+  version: 616992984d7477c8fcf31bea6a64b296f26e82ce
+  subpackages:
+  - errors
+  - util
 - name: github.com/Sirupsen/logrus
   version: ba1b36c82c5e05c4f912a88eab0dcd91a171688f
 - name: github.com/tinylib/msgp
@@ -56,7 +62,7 @@ imports:
   subpackages:
   - msgp
 - name: golang.org/x/net
-  version: 61557ac0112b576429a0df080e1c2cef5dfbb642
+  version: feeb485667d1fdabe727840fe00adc22431bc86e
   subpackages:
   - context
   - http2
@@ -69,15 +75,24 @@ imports:
   version: e24f485414aeafb646f6fca458b0bf869c0880a1
   subpackages:
   - unix
+- name: golang.org/x/text
+  version: f28f36722d5ef2f9655ad3de1f248e3e52ad5ebd
+  subpackages:
+  - secure/bidirule
+  - transform
+  - unicode/bidi
+  - unicode/norm
 - name: google.golang.org/genproto
   version: de9f5e90fe9b278809363f08c2072d2f2a429de7
   subpackages:
   - googleapis/api/annotations
+  - googleapis/rpc/status
 - name: google.golang.org/grpc
-  version: 8050b9cbc271307e5a716a9d782803d09b0d6f2d
+  version: d2e1b51f33ff8c5e4a15560ff049d200e83726c5
   subpackages:
   - codes
   - credentials
+  - grpclb/grpc_lb_v1
   - grpclog
   - internal
   - keepalive
@@ -85,6 +100,7 @@ imports:
   - naming
   - peer
   - stats
+  - status
   - tap
   - transport
 testImports: []

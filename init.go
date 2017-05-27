@@ -12,21 +12,22 @@ import (
 	"github.com/evalphobia/logrus_fluent"
 	"github.com/kelseyhightower/envconfig"
 	"github.com/sagikazarmark/nomine/app"
-	"github.com/sagikazarmark/serverz"
+	"github.com/sagikazarmark/utilz/errors"
+	"github.com/sagikazarmark/utilz/util"
 	"golang.org/x/net/trace"
 	"google.golang.org/grpc/grpclog"
 )
 
 // Global context variables
 var (
-	config   = &app.Configuration{}
-	logger   = logrus.New().WithField("service", app.ServiceName) // Use logrus.FieldLogger type
-	shutdown = serverz.NewShutdown(logger)
+	config          = &app.Configuration{}
+	logger          = logrus.New().WithField("service", app.ServiceName) // Use logrus.FieldLogger type
+	shutdownManager = util.NewShutdownManager(errors.NewLogHandler(logger))
 )
 
 func init() {
 	// Register shutdown handler in logrus
-	logrus.RegisterExitHandler(shutdown.Handle)
+	logrus.RegisterExitHandler(shutdownManager.Shutdown)
 
 	// Set global gRPC logger
 	grpclog.SetLogger(logger.WithField("server", "grpc"))
@@ -67,6 +68,6 @@ func init() {
 		fluentdHook.AddFilter("error", logrus_fluent.FilterError)
 
 		logger.Logger.Hooks.Add(fluentdHook)
-		shutdown.Register(fluentdHook.Fluent.Close)
+		shutdownManager.Register(fluentdHook.Fluent.Close)
 	}
 }
