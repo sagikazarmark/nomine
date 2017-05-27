@@ -17,10 +17,10 @@ so that you can find a globally unique name.
 
 ## Supported services
 
-- [ ] Github
-- [ ] Twitter
-- [ ] Docker
-- [ ] Domain names (using Namecheap API)
+- Github
+- Twitter
+- Docker
+- Domain names
 
 
 ## How does it work?

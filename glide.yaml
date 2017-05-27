@@ -1,11 +1,18 @@
 package: github.com/sagikazarmark/nomine
 import:
-- package: github.com/sagikazarmark/healthz
-  version: ~0.5.0
-- package: github.com/Sirupsen/logrus
-  version: ^0.11.2
 - package: github.com/kelseyhightower/envconfig
   version: ^1.3.0
+- package: github.com/Sirupsen/logrus
+  version: ^0.11.2
+- package: github.com/evalphobia/logrus_fluent
+  version: ~0.1.0
+- package: golang.org/x/net
+  subpackages:
+  - trace
+- package: github.com/sagikazarmark/healthz
+  version: ~0.6.0
+- package: github.com/sagikazarmark/serverz
+  version: ~0.3.0
 - package: github.com/googleapis/googleapis
 - package: github.com/google/protobuf
   version: ^3.2.0
@@ -15,13 +22,6 @@ import:
   version: ^1.1.0
 - package: google.golang.org/grpc
   version: ^1.0.5
-- package: golang.org/x/net
-  subpackages:
-  - trace
-- package: github.com/sagikazarmark/serverz
-  version: ~0.2.0
 - package: github.com/rs/cors
   version: ^1.0.0
-- package: github.com/evalphobia/logrus_fluent
-  version: ~0.1.0
 - package: github.com/ChimeraCoder/anaconda
