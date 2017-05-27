@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiEndpoint: 'https://nomine.sagikazarmark.hu'
+    apiEndpoint: 'https://api.nomine.sagikazarmark.hu'
 };
